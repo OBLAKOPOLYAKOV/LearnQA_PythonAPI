@@ -38,29 +38,23 @@ methods = ['POST', 'GET', 'PUT', 'DELETE']
 
 for method in methods:
     response = requests.get(url, params = method)
-    if method != 'GET' and response.status_code == 200:
-        print(f"Для метода GET и параметра {method} возвращается status code: {response.status_code}, хоть и не должен был")
-    else:
-        print(f"!!!Для метода GET c параметром {method} возвращается {response.status_code} ")
-    response = requests.post(url, data=method)
-    if method != 'POST' and response.status_code == 200:
-        print(
-            f"Для метода POST и параметра {method} возвращается status code: {response.status_code}, хоть и не должен был")
-    else:
-        print(f"!!!Для метода POST c параметром {method} возвращается {response.status_code} ")
-    response = requests.put(url, data=method)
-    if method != 'PUT' and response.status_code == 200:
-        print(
-            f"Для метода PUT и параметра {method} возвращается status code: {response.status_code}, хоть и не должен был")
-    else:
-        print(f"!!!Для метода PUT c параметром {method} возвращается {response.status_code} ")
-    response = requests.get(url, data=method)
-    if method != 'DELETE' and response.status_code == 200:
-        print(
-            f"Для метода DELETE и параметра {method} возвращается status code: {response.status_code}, хоть и не должен был")
-    else:
-        print(f"!!!Для метода DELETE c параметром {method} возвращается {response.status_code} ")
+    if method != 'GET' and response.status_code == 200 or method == 'GET' and response.status_code != 200:
+        print(f"Для метода GET и параметра {method} возвращается status code: {response.status_code} - так быть не должно")
 
+    response = requests.post(url, data=method)
+    if method != 'POST' and response.status_code == 200 or method == 'POST' and response.status_code != 200:
+        print(
+            f"Для метода POST и параметра {method} возвращается status code: {response.status_code} - хоть и не должен был")
+
+    response = requests.put(url, data=method)
+    if method != 'PUT' and response.status_code == 200 or method == 'PUT' and response.status_code != 200:
+        print(
+            f"Для метода PUT и параметра {method} возвращается status code: {response.status_code}- хоть и не должен был")
+
+    response = requests.get(url, data=method)
+    if method != 'DELETE' and response.status_code == 200 or method == 'DELETE' and response.status_code != 200:
+        print(
+            f"Для метода DELETE и параметра {method} возвращается status code: {response.status_code}, - так быть не должно")
 
 methods = ['POST', 'GET', 'PUT', 'DELETE']
 for type in methods:
@@ -69,13 +63,10 @@ for type in methods:
             resoult4 = request(type, url, params=params)
         else:
             resoult4 = request(type, url, data=params)
-        if type == params and resoult4.status_code == 200:
+        if type != params and resoult4.status_code == 200:
             print(f"method {type}, параметр {params} возвращает: '{resoult4.text}', со статус кодом '"
                 f"{resoult4.status_code}'")
-        elif resoult4.status_code == 200:
+        elif type == params and resoult4.status_code != 200:
             print(f"method {type}, параметр {params} возвращает: '{resoult4.text}', со статус кодом '"
-                  f"{resoult4.status_code}' - хоть и не должен был")
-        else:
-            print(f"method {type}, параметр {params} возвращает: '{resoult4.text}', со статус кодом '"
-                  f"{resoult4.status_code}' - как сюда попасть хз")
+                  f"{resoult4.status_code}' - так быть не должно")
 
