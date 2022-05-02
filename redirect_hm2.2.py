@@ -11,6 +11,8 @@ len = int(len(result.history))
 
 #Для каждого редиректа выводим урл и порядковый номер редиректа
 for a in range(len):
-    print(f"{a+1} URL: {result.history[a].url}")
-
+    if a+1 == len:
+        print(f"{a+1} URL: {result.history[a].url} - Последний!")
+    else:
+        print(f"{a+1} URL: {result.history[a].url}")
 print(f"Всего редиректов было {len}")
