@@ -28,6 +28,16 @@ class TestUserAgent:
     def test_user_agent(self, user_agents, platform, browser, device):
         url = "https://playground.learnqa.ru/ajax/api/user_agent_check"
         response = requests.get(url, headers={"User-Agent": user_agents})
-        assert platform in response.text, f"Cannot find platform:'{platform}' in the response"
-        assert browser in response.text, f"Cannot find browser:'{browser}' in the response"
-        assert device in response.text, f"Cannot find device:'{device}' in the response"
+        result_platform = response.json()['platform']
+        result_browser = response.json()['browser']
+        result_device = response.json()['device']
+
+        assert platform in result_platform, f"Cannot find platform:'{platform}' in the response_platform:{result_platform}"
+        assert browser in result_browser, f"Cannot find browser:'{browser}' in the response_browser:{result_browser}"
+        assert device in result_device, f"Cannot find device:'{device}' in the response_device:{result_device}"
+
+       # Или так:
+       # result = [result_platform, result_browser, result_device]
+       # expected = [platform, browser, device]
+       # for i in range(len(expected)):
+       #     assert expected[i] in result[i], f"Cannot find {expected[i]}. Response_result: {result[i]}"
