@@ -23,16 +23,20 @@ class BaseCase:
 
         return response_as_dict[name]
 
-    def prepare_registration_data(self, email = None):
+    def prepare_registration_data(self, email=None, name=None, name_args=1):
         if email is None:
             base_part = "learnqa"
             domain = "example.com"
             random_part = datetime.now().strftime("%m%d%Y%H%M%S")
             email = f"{base_part}{random_part}@{domain}"
+        if name is None:
+            name = "learnqa"
+
+        name = name*name_args
 
         return {
             'password': '123',
-            'username': 'learnqa',
+            'username': name,
             'firstName': 'learnqa',
             'lastName': 'learnqa',
             'email': email
