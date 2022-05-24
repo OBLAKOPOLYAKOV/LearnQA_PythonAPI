@@ -1,4 +1,9 @@
-import json
+# Ответ:
+"""
+Пароль: welcome
+https://github.com/OBLAKOPOLYAKOV/LearnQA_PythonAPI/commit/22ab8389dc7df60024aba14968dc1c6483ef2cd2
+"""
+
 import requests
 
 url = "https://playground.learnqa.ru/ajax/api/get_secret_password_homework"
