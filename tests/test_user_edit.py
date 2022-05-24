@@ -212,5 +212,5 @@ class TestUserEdit(BaseCase):
                                    headers={"x-csrf-token": token},
                                    cookies={"auth_sid": auth_sid}
                                    )
-        Assertions.asser_json_value_by_name(response4, 'firstname', name,
+        Assertions.asser_json_value_by_name(response4, 'firstName', name,
                                             "Wrong email of the user after edit on different email")

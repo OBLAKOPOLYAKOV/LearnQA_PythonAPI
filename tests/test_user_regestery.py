@@ -46,7 +46,7 @@ class TestUserRegister(BaseCase):
         data = self.prepare_registration_data(name=name)
         response = MyRequests.post(url, data=data)
         Assertions.assert_code_status(response, 400)
-        Assertions.assert_response_text(response, f"The value of 'username' field is too short")
+        Assertions.assert_response_text(response, f"The value of 'firstName' field is too short")
 
     def test_create_user_with_250_symbol_name(self):
         url = "/user/"
