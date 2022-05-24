@@ -171,6 +171,13 @@ class TestUserEdit(BaseCase):
         Assertions.assert_code_status(response3, 400)
         Assertions.assert_response_text(response3, "Invalid email format")
 
+        # GET: Get firstname user data with auth. Check that the name has not changed
+        response4 = MyRequests.get(f"/user/{user_id}",
+                                   headers={"x-csrf-token": token},
+                                   cookies={"auth_sid": auth_sid}
+                                   )
+        Assertions.asser_json_value_by_name(response4, 'email', email, "Wrong email of the user after edit on different email")
+
     def test_change_firstname_to_different_value(self):
         # REGISTER: Create new user 1.
         register_data = self.prepare_registration_data()
@@ -198,3 +205,12 @@ class TestUserEdit(BaseCase):
                                    data={'firstName': new_name})
         Assertions.assert_code_status(response3, 400)
         Assertions.assert_response_text(response3, "Too short value for field firstName")
+
+        # GET: Get firstname user data with auth. Check that the name has not changed
+        name = register_data['firstName']
+        response4 = MyRequests.get(f"/user/{user_id}",
+                                   headers={"x-csrf-token": token},
+                                   cookies={"auth_sid": auth_sid}
+                                   )
+        Assertions.asser_json_value_by_name(response4, 'firstname', name,
+                                            "Wrong email of the user after edit on different email")
