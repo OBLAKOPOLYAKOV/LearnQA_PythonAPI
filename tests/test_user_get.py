@@ -3,9 +3,13 @@ import pytest
 from lib.assertions import Assertions
 from lib.base_case import BaseCase
 from lib.my_requests import MyRequests
+import allure
 
 
+@allure.epic("Get user info cases")
 class TestUserGet(BaseCase):
+
+    @allure.description("This test without login trying to get info details user")
     def test_get_user_details_not_auth(self):
         response = requests.get("https://playground.learnqa.ru/api/user/2")
         Assertions.assert_json_has_key(response, "username")
@@ -14,7 +18,8 @@ class TestUserGet(BaseCase):
         ]
         Assertions.assert_json_has_not_keys(response, keys)
 
-    def test_get_user_details_auth_as__another_user(self):
+    @allure.description("This test login system and trying to get info details another user")
+    def test_get_user_details_auth_as_another_user(self):
         # Login user with id=2:
         data = {
             'email': 'vinkotov@example.com',
@@ -41,6 +46,7 @@ class TestUserGet(BaseCase):
         Assertions.assert_json_has_key(response3, "username")
         Assertions.assert_json_has_not_keys(response3, keys)
 
+    @allure.description("This test login system and trying to get user info with correct token")
     def test_get_user_details_auth_as_same_user(self):
         data = {
             'email': 'vinkotov@example.com',

@@ -3,8 +3,9 @@ from lib.base_case import BaseCase
 from lib.assertions import Assertions
 from lib.my_requests import MyRequests
 from datetime import datetime
+import allure
 
-
+@allure.epic("Edit data cases")
 class TestUserEdit(BaseCase):
     exclude_critical_data = [
         ("username"),
@@ -13,6 +14,7 @@ class TestUserEdit(BaseCase):
         ("email")
     ]
 
+    @allure.description("This test with login trying to edit user info:firstName")
     def test_edit_just_created_user(self):
         # REGISTER
         register_data = self.prepare_registration_data()
@@ -47,6 +49,7 @@ class TestUserEdit(BaseCase):
                                    cookies={"auth_sid": auth_sid})
         Assertions.asser_json_value_by_name(response4, "firstName", new_name, "Wrong name of the user after edit")
 
+    @allure.description("This test without login trying to edit user info")
     @pytest.mark.parametrize('exclude_data', exclude_critical_data)
     def test_edit_user_without_login(self, exclude_data):
         # REGISTER: Create new user.
@@ -85,6 +88,7 @@ class TestUserEdit(BaseCase):
         Assertions.asser_json_value_by_name(response4, exclude_data, data, "Wrong data of the user after edit without "
                                                                            "login !")
 
+    @allure.description("This test with login trying to edit another user info")
     @pytest.mark.parametrize('exclude_data', exclude_critical_data)
     def test_change_data_with_login_other_user(self, exclude_data):
         # REGISTER: Create new user 1.
@@ -143,6 +147,7 @@ class TestUserEdit(BaseCase):
         Assertions.asser_json_value_by_name(response6, exclude_data, data, "Wrong name of the user after edit without "
                                                                            "login !")
 
+    @allure.description("This test with login trying to change user email to different email")
     def test_change_different_email(self):
         # REGISTER: Create new user 1.
         register_data = self.prepare_registration_data()
@@ -178,6 +183,7 @@ class TestUserEdit(BaseCase):
                                    )
         Assertions.asser_json_value_by_name(response4, 'email', email, "Wrong email of the user after edit on different email")
 
+    @allure.description("This test with login trying to edit user info:firstName to different value: 1 symbol")
     def test_change_firstname_to_different_value(self):
         # REGISTER: Create new user 1.
         register_data = self.prepare_registration_data()
