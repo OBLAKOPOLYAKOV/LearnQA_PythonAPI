@@ -46,6 +46,7 @@ class TestUserGet(BaseCase):
         Assertions.assert_json_has_key(response3, "username")
         Assertions.assert_json_has_not_keys(response3, keys)
 
+    @allure.severity('Critical')
     @allure.description("This test login system and trying to get user info with correct token")
     def test_get_user_details_auth_as_same_user(self):
         data = {

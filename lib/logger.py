@@ -30,7 +30,7 @@ class Logger:
             data_to_add += cls._write_log_to_allure(f"Request data: {data}\n")
             data_to_add += cls._write_log_to_allure(f"Request headers: {headers}\n")
             data_to_add += cls._write_log_to_allure(f"Request cookies: {cookies}\n")
-            data_to_add += "\n"
+        data_to_add += "\n"
 
         cls._write_log_to_file(data_to_add)
 
@@ -39,11 +39,11 @@ class Logger:
         cookies_as_dict = dict(response.cookies)
         headers_as_dict = dict(response.headers)
         with allure.step(f"Response:"):
-            data_to_add = cls._write_log_to_allure(f" Response code: {response.status_code}\n")
-            data_to_add += cls._write_log_to_allure(f" Response text: {response.text}\n")
-            data_to_add += cls._write_log_to_allure(f" Response headers: {headers_as_dict}\n")
-            data_to_add += cls._write_log_to_allure(f" Response headers: {headers_as_dict}\n")
-            data_to_add += cls._write_log_to_allure(f" Response cookies: {cookies_as_dict}\n")
+            data_to_add = cls._write_log_to_allure(f"Response code: {response.status_code}\n")
+            data_to_add += cls._write_log_to_allure(f"Response text: {response.text}\n")
+            data_to_add += cls._write_log_to_allure(f"Response headers: {headers_as_dict}\n")
+            data_to_add += cls._write_log_to_allure(f"Response headers: {headers_as_dict}\n")
+            data_to_add += cls._write_log_to_allure(f"Response cookies: {cookies_as_dict}\n")
         data_to_add += f"\n-----\n"
 
         cls._write_log_to_file(data_to_add)

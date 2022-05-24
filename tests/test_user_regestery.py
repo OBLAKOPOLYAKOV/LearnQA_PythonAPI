@@ -17,6 +17,7 @@ class TestUserRegister(BaseCase):
         ("email")
     ]
 
+    @allure.severity('Critical')
     @allure.description("This test successfully create new user")
     def test_create_user_successfully(self):
         url = "/user/"
@@ -26,6 +27,7 @@ class TestUserRegister(BaseCase):
         Assertions.assert_code_status(response, 200)
         Assertions.assert_json_has_key(response, "id")
 
+    @allure.severity('Critical')
     @allure.description("This test create new user with existing email and get status code 400")
     def test_create_user_with_existing_email(self):
         url = "/user/"
@@ -63,6 +65,7 @@ class TestUserRegister(BaseCase):
         Assertions.assert_code_status(response, 200)
         Assertions.assert_json_has_key(response, "id")
 
+    @allure.severity('Critical')
     @allure.description("This test trying to create new user without critical data and test must get status code 400")
     @pytest.mark.parametrize('exclude_data', exclude_critical_data)
     def test_create_user_without_critical_data(self, exclude_data):

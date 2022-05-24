@@ -14,6 +14,7 @@ class TestUserEdit(BaseCase):
         ("email")
     ]
 
+    @allure.severity('Critical')
     @allure.description("This test with login trying to edit user info:firstName")
     def test_edit_just_created_user(self):
         # REGISTER
@@ -49,6 +50,7 @@ class TestUserEdit(BaseCase):
                                    cookies={"auth_sid": auth_sid})
         Assertions.asser_json_value_by_name(response4, "firstName", new_name, "Wrong name of the user after edit")
 
+    @allure.severity('Critical')
     @allure.description("This test without login trying to edit user info")
     @pytest.mark.parametrize('exclude_data', exclude_critical_data)
     def test_edit_user_without_login(self, exclude_data):
@@ -88,6 +90,7 @@ class TestUserEdit(BaseCase):
         Assertions.asser_json_value_by_name(response4, exclude_data, data, "Wrong data of the user after edit without "
                                                                            "login !")
 
+    @allure.severity('Critical')
     @allure.description("This test with login trying to edit another user info")
     @pytest.mark.parametrize('exclude_data', exclude_critical_data)
     def test_change_data_with_login_other_user(self, exclude_data):

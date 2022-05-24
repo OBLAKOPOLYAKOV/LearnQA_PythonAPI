@@ -6,6 +6,7 @@ from lib.my_requests import MyRequests
 
 @allure.epic("Delete cases")
 class TestUserDelete(BaseCase):
+    @allure.severity('Critical')
     @allure.description("Попытка удаления Админ. пользователя")
     def test_delete_admin_user(self):
         # LOGIN: login with admin data
@@ -26,6 +27,7 @@ class TestUserDelete(BaseCase):
         Assertions.assert_code_status(response2, 400)
         Assertions.assert_response_text(response2, "Please, do not delete test users with ID 1, 2, 3, 4 or 5")
 
+    @allure.severity('Critical')
     @allure.description("This test delete user from system")
     def test_delete_user(self):
         # REGISTER: Create new user 1.
@@ -60,6 +62,7 @@ class TestUserDelete(BaseCase):
                                    )
         Assertions.assert_response_text(response4, "User not found")
 
+    @allure.severity('Critical')
     @allure.description("This test trying delete other user from system")
     def test_delete_other_user(self):
         # REGISTER: Create new user 1.
