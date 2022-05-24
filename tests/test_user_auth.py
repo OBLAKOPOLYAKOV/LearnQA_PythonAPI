@@ -4,7 +4,7 @@ from lib.assertions import Assertions
 from lib.my_requests import MyRequests
 import allure
 
-
+@allure.severity('Critical')
 @allure.epic("Authorization cases")
 class TestUserAuth(BaseCase):
     exclude_params = [
