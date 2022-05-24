@@ -35,8 +35,8 @@ class BaseCase:
 
         registration_data = {
             'password': '123',
-            'username': name * name_args,
-            'firstName': 'learnqa',
+            'username': 'learnqa',
+            'firstName': name * name_args,
             'lastName': 'learnqa',
             'email': email
         }
