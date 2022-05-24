@@ -11,7 +11,7 @@ class Assertions:
             assert False, f"Response is not in JSON format. Response text is '{response.text}'"
 
         assert name in response_as_dict, f"Response JSON doesn`t have key '{name}'"
-        assert response_as_dict[name] == expected_value, error_massage
+        assert str(response_as_dict[name]) == expected_value, error_massage
 
     @staticmethod
     def assert_json_has_key(response: Response, name):
